@@ -1,7 +1,3 @@
 FROM mongo
 
-ADD ./init-db.d/init.js /docker-entrypoint-initdb.d
-
-RUN chmod a+r /docker-entrypoint-initdb.d/*
-
 EXPOSE 27017

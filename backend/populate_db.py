@@ -2,7 +2,7 @@ from api.models import Department, Employee, Role, Task
 
 
 def populate_db():
-    
+
     engineering = Department(name="Engineering")
     engineering.save()
 
@@ -18,7 +18,8 @@ def populate_db():
     debug = Task(name="Debug")
     test = Task(name="Test")
 
-    tracy = Employee(name="Tracy", department=hr, roles=[engineer, manager], tasks=[])
+    tracy = Employee(name="Tracy", department=hr, roles=[
+                     engineer, manager], tasks=[])
     tracy.save()
 
     peter = Employee(
