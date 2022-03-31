@@ -1,11 +1,16 @@
 import graphene
 from graphene.relay import Node
 from graphene_mongo import MongoengineConnectionField, MongoengineObjectType
-from .models import Department as DepartmentModel
-from .models import Employee as EmployeeModel
-from .models import Role as RoleModel
-from .models import Task as TaskModel
+from .models import (
+    Department as DepartmentModel,
+    Employee as EmployeeModel,
+    Role as RoleModel,
+    Task as TaskModel
+)
 
+'''
+TYPES
+'''
 
 class Department(MongoengineObjectType):
     class Meta:
@@ -17,9 +22,6 @@ class Role(MongoengineObjectType):
     class Meta:
         model = RoleModel
         interfaces = (Node,)
-        filter_fields = {
-            'name': ['exact', 'icontains', 'istartswith']
-        }
 
 
 class Task(MongoengineObjectType):
@@ -32,16 +34,66 @@ class Employee(MongoengineObjectType):
     class Meta:
         model = EmployeeModel
         interfaces = (Node,)
-        filter_fields = {
-            'name': ['exact', 'icontains', 'istartswith']
-        }
+
+
+'''
+MUTATIONS
+'''
+#TODO: write mutations for Employee 
+
+class CreateEmployee(graphene.Mutation):
+    employee = graphene.Field(Employee)
+
+    class Arguments:
+        pass
+
+class UpdateEmployee(graphene.Mutation):
+    employee = graphene.Field(Employee)
+
+    class Arguments:
+        pass
+
+class DeleteEmployee(graphene.Mutation):
+    employee = graphene.Field(Employee)
+
+    class Arguments:
+        pass
+
+
+'''
+QUERIES
+'''
 
 
 class Query(graphene.ObjectType):
     node = Node.Field()
-    all_employees = MongoengineConnectionField(Employee)
+    department = graphene.Field(Department, name=graphene.String())
+    role = graphene.Field(Role, name=graphene.String())
+    employee = graphene.Field(Employee, name=graphene.String())
+
+    all_departments = MongoengineConnectionField(Department)
     all_roles = MongoengineConnectionField(Role)
-    role = graphene.Field(Role)
+    all_employees = MongoengineConnectionField(Employee)
+
+    def resolve_department(root, info, name):
+        return DepartmentModel.objects.get(name=name)
+
+    def resolve_role(root, info, name):
+        return RoleModel.objects.get(name=name)
+
+    def resolve_employee(root, info, name):
+        return EmployeeModel.objects.get(name=name)
 
 
-schema_query = graphene.Schema(query=Query, types=[Department, Employee, Role])
+class Mutation(graphene.ObjectType):
+    create_employee = CreateEmployee.Field()
+    update_employee = UpdateEmployee.Field()
+    delete_employee = DeleteEmployee.Field()
+    
+
+'''
+SCHEMA
+'''
+
+
+schema = graphene.Schema(query=Query, types=[Department, Role, Task, Employee])

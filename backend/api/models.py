@@ -27,5 +27,5 @@ class Employee(db.Document):
     hired_on = db.DateTimeField(default=datetime.now)
     department = db.ReferenceField(Department)
     roles = db.ListField(db.ReferenceField(Role))
-    leader = db.ReferenceField("Employee")
+    manager = db.ReferenceField("Employee")
     tasks = db.ListField(db.EmbeddedDocumentField(Task))

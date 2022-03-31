@@ -1,40 +1,45 @@
-from api.models import Department, Employee, Role, Task
+from api.models import (
+    Department as DepartmentModel,
+    Employee as EmployeeModel,
+    Role as RoleModel,
+    Task as TaskModel
+)
 
 
 def populate_db():
 
-    engineering = Department(name="Engineering")
+    engineering = DepartmentModel(name="Engineering")
     engineering.save()
 
-    hr = Department(name="Human Resources")
+    hr = DepartmentModel(name="Human Resources")
     hr.save()
 
-    manager = Role(name="manager")
+    manager = RoleModel(name="manager")
     manager.save()
 
-    engineer = Role(name="engineer")
+    engineer = RoleModel(name="engineer")
     engineer.save()
 
-    debug = Task(name="Debug")
-    test = Task(name="Test")
+    debug = TaskModel(name="Debug")
+    test = TaskModel(name="Test")
 
-    tracy = Employee(name="Tracy", department=hr, roles=[
-                     engineer, manager], tasks=[])
+    tracy = EmployeeModel(name="Tracy", department=hr, roles=[
+        engineer, manager], tasks=[])
     tracy.save()
 
-    peter = Employee(
+    peter = EmployeeModel(
         name="Peter",
         department=engineering,
-        leader=tracy,
+        manager=tracy,
         roles=[engineer],
         tasks=[debug, test],
     )
     peter.save()
 
-    roy = Employee(
+    roy = EmployeeModel(
         name="Roy",
         department=engineering,
-        leader=tracy,
+        manager=tracy,
         roles=[engineer],
         tasks=[debug],
     )
