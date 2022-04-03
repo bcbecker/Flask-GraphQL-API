@@ -40,14 +40,13 @@ class UpdateDepartment(graphene.Mutation):
         if name:
             _department.name = name
 
-        if _department:
-            _department.save()
+        _department.save()
 
         return UpdateDepartment(department=_department)
 
 
 class DeleteDepartment(graphene.Mutation):
-    department = graphene.Field(DepartmentModel)
+    department = graphene.Field(DepartmentType)
 
     class Arguments:
         id = graphene.ID(required=True)

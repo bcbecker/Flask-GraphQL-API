@@ -40,14 +40,13 @@ class UpdateRole(graphene.Mutation):
         if name:
             _role.name = name
 
-        if _role:
-            _role.save()
+        _role.save()
 
         return UpdateRole(role=_role)
 
 
 class DeleteRole(graphene.Mutation):
-    _role = graphene.Field(RoleModel)
+    role = graphene.Field(RoleType)
 
     class Arguments:
         id = graphene.ID(required=True)
