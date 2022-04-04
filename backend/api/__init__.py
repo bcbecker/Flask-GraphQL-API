@@ -17,7 +17,7 @@ def create_app(config_class=Config):
     db.init_app(app)
 
     # Register any blueprints here
-    from .routes import employees
-    app.register_blueprint(employees)
+    from .routes import api
+    app.register_blueprint(api)
 
     return app

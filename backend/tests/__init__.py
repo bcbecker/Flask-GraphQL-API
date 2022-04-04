@@ -1,4 +1,4 @@
 #For packaging
 '''
-Description of test package
+Test package for unit/functional tests in api module
 '''
