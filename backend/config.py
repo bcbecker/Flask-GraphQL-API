@@ -25,5 +25,8 @@ class DevelopmentConfig(Config):
 
 
 class TestingConfig(Config):
-    # TODO: mock mongodb
     TESTING = True
+    MONGODB_SETTINGS = {
+        'db': 'mongoenginetest',
+        'host': 'mongomock://localhost'
+    }
