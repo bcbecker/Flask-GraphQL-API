@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+python-dotenv = "*"
+flask = "*"
+flask-mongoengine = "*"
+flask-graphql = "*"
+pytest-cov = "*"
+mongomock = "*"
+gunicorn = "*"
+graphene-mongo = "==0.2.13"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
