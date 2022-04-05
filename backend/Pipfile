@@ -12,6 +12,7 @@ pytest-cov = "*"
 mongomock = "*"
 gunicorn = "*"
 graphene-mongo = "==0.2.13"
+snapshottest = "*"
 
 [dev-packages]
 
