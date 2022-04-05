@@ -1,6 +1,8 @@
 # Flask-GraphQL-API
 Flask API using Graphene to query a MongoDB database. Containerized with Docker.
 
+A simple learning project for Mongo and GraphQL (Graphene).
+
 
 ## Table of Contents
 * [General Info](#general-information)
@@ -13,14 +15,16 @@ Flask API using Graphene to query a MongoDB database. Containerized with Docker.
 
 
 ## General Information
-TODO
+In the past, I've primarily dealt with REST APIs and SQL databases. So, I felt it was time to dive into GraphQL and a NoSQL database. In this case, Graphene and MongoDB. This project started with the basic [graphene-mongo tutorial](https://codedthemes.com/demos/admin-templates/datta-able/react/docs/), and has grown to include more queries and create/update/delete mutations for each Mongo document. 
+
+The testing is still in progress, as I've found testing GraphQL to be a tad tricky. As I learn, I'll continue to update the API, as I feel this is the best way to learn. 
 
 
 ## Technologies Used
 - Flask, with the Flask-GraphQL extension
     - Flask-Mongoengine as the ORM
     - Graphene-mongo for GraphQL schema/querying
-    - pytest, coverage for testing
+    - pytest, coverage, and mongomock for testing
     - gunicorn as the production WSGI server
 
 - MongoDB, with prepopulated data
@@ -39,6 +43,18 @@ TODO
         |-- requirements.txt
         |-- .env
         |__ /api
+            |__ /department
+                |-- __init__.py
+                |-- mutations.py
+                |-- types.py
+            |__ /employee
+                |-- __init__.py
+                |-- mutations.py
+                |-- types.py
+            |__ /role
+                |-- __init__.py
+                |-- mutations.py
+                |-- types.py
             |-- __init__.py
             |-- models.py
             |-- routes.py
@@ -56,7 +72,7 @@ TODO
 - GraphQL API querying a NoSQL dataset
     - Query all employees, departments, or roles
     - Query individual employees, departments, or roles
-    - Mutate (create, update, delete) employees
+    - Mutate (create, update, delete) employees, departments, or roles
 
 
 ## Setup with Docker
@@ -115,8 +131,8 @@ GraphiQL interface at: http://127.0.0.1:5000/graphql
 
 
 ## Querying the API
-To query all employees, returning all information including department, roles, manager, and tasks:
-```json
+Queries and mutations can be executed via the GraphiQL interface, or testing tools like Postman. To query all employees, returning all information including department, roles, manager, and tasks:
+```
 {
   allEmployees {
     edges {
@@ -157,5 +173,5 @@ To query all employees, returning all information including department, roles, m
 
 ## TODO
 TODO:
-- Add mutations to schema
-- Finish README
+- Fix task mutations
+- Update testing
